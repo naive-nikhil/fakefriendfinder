@@ -7,7 +7,7 @@ exports.createGame = async (req, res) => {
   const { gameData } = req.body;
 
   // Validate Data
-  if (!gameData || !Array.isArray(gameData) || gameData.length !== 3) {
+  if (!gameData || !Array.isArray(gameData) || gameData.length !== 1) {
     return res
       .status(400)
       .json({ message: "Invalid game data, must be an array of 10 items." });
@@ -26,8 +26,6 @@ exports.createGame = async (req, res) => {
     hashedQuestion: hashData(item.question),
     hashedCorrectAnswer: hashData(item.correctAnswer),
   }));
-
-  console.log(hashedGameData);
 
   // Save to DB
   const newGame = await Game.create({ hashedGameData });
@@ -60,10 +58,58 @@ exports.getGame = async (req, res) => {
   // Send Response
   res.status(200).json({
     gameId: game._id,
-    gameData: game.hashedGameData,
+    hashedGameData: game.hashedGameData,
   });
 };
 
-exports.submitResponse = async (req, res) => {};
+exports.submitResponse = async (req, res) => {
+  // Get data from request params and body
+  const { id } = req.params;
+  const { guessedAnswers, friendName, score } = req.body;
 
-exports.getScores = async (req, res) => {};
+  // Validate Id and Responses
+  if (!id) {
+    return res.status(400).json({ message: "Game Id is required." });
+  }
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ message: "Invalid Game Id." });
+  }
+
+  if (
+    !guessedAnswers ||
+    !Array.isArray(guessedAnswers) ||
+    guessedAnswers.length !== 1 ||
+    !friendName ||
+    !score
+  ) {
+    return res.status(400).json({
+      message: "Invalid responses, must be an array of 10 responses.",
+    });
+  }
+
+  // Hash responses
+  const hashedGuessedAnswers = guessedAnswers.map((item) => hashData(item));
+  const hashedFriendName = hashData(friendName);
+  const hashedScore = hashData(score);
+
+  // Get Game from DB
+  const game = await Game.findById(id);
+
+  // Validate Game Data from db
+  if (!game) {
+    return res.status(404).json({ message: "Game not found." });
+  }
+
+  // Store hashed responses in DB
+  game.hashedResponses.push({
+    hashedFriendName,
+    hashedGuessedAnswers,
+    hashedScore,
+  });
+
+  // Save to DB
+  await game.save();
+
+  res.status(201).json({ message: "Response submitted successfully." });
+};

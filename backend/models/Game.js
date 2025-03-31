@@ -9,11 +9,12 @@ const gameSchema = new mongoose.Schema(
         _id: false,
       },
     ],
-    responses: [
+    hashedResponses: [
       {
-        friendName: { type: String, required: true },
-        answers: [{ type: String, required: true }],
-        score: { type: Number, required: true },
+        hashedFriendName: { type: String, required: true },
+        hashedGuessedAnswers: [{ type: String, required: true }],
+        hashedScore: { type: String, required: true },
+        _id: false,
       },
     ],
   },

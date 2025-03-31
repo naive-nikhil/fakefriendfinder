@@ -2,10 +2,11 @@ const mongoose = require("mongoose");
 
 const gameSchema = new mongoose.Schema(
   {
-    gameData: [
+    hashedGameData: [
       {
-        question: { type: String, required: true },
-        correctAnswer: { type: String, required: true },
+        hashedQuestion: { type: String, required: true },
+        hashedCorrectAnswer: { type: String, required: true },
+        _id: false,
       },
     ],
     responses: [

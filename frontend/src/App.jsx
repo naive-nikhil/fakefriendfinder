@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "./components/Navbar";
 import { Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
@@ -35,6 +36,7 @@ const App = () => {
           element={<div className="text-3xl">Home</div>}
         />
       </Routes>
+      <Footer />
     </>
   );
 };

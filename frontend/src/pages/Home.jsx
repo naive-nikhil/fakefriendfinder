@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <>
-      <div className="w-full h-[calc(100vh-80px)] flex flex-col items-center">
+      <div className="w-full h-[calc(100vh-120px)] flex flex-col items-center">
         <div className="relative">
-          <img className="w-[400px] h-auto" src="/home.svg" alt="" />
+          <img className="w-[350px] h-auto" src="/home.svg" alt="" />
         </div>
-        <div className="flex flex-col items-center justify-center gap-10 mt-4 bg-white w-full h-full">
-          <h1 className="text-4xl font-extrabold text-center uppercase -rotate-6 -mt-20">
+        <div className="flex flex-col items-center justify-center bg-white w-full h-full px-4 gap-2">
+          <h1 className="text-4xl font-extrabold text-center uppercase -rotate-6">
             who's{" "}
             <span className="text-red-500">
               fake,
@@ -17,6 +17,83 @@ const Home = () => {
             </span>{" "}
             who's <span className="text-red-500">real?</span>
           </h1>
+          <div className="flex flex-col items-center justify-center p-4 text-base">
+            <h2 className="max-w-[400px] text-[#444] font-bold text-xl mb-4">
+              - How it works?
+            </h2>
+            {/* Step 1: Create Quiz */}
+            <div className="flex flex-row items-center justify-start gap-4 border border-gray-200 rounded-lg p-4 w-55">
+              <svg
+                className="w-6 h-6"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="#444"
+                  strokeWidth="1.5"
+                  fill="white"
+                />
+                <path
+                  d="M8 12H16M12 8V16"
+                  stroke="#444"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+              </svg>
+              <p className="text-[#444]">Create Quiz</p>
+            </div>
+
+            {/* Step 2: Share with Friends */}
+            <div className="flex flex-row items-center justify-start gap-4 border border-gray-200 rounded-lg p-4 w-55">
+              <svg
+                className="w-6 h-6"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle cx="6" cy="12" r="3" stroke="#444" strokeWidth="1.5" />
+                <circle cx="18" cy="6" r="3" stroke="#444" strokeWidth="1.5" />
+                <circle cx="18" cy="18" r="3" stroke="#444" strokeWidth="1.5" />
+                <path
+                  d="M9 10.5L15 7.5M9 13.5L15 16.5"
+                  stroke="#444"
+                  strokeWidth="1.5"
+                />
+              </svg>
+              <p className="text-[#444]">Share with Friends</p>
+            </div>
+
+            {/* Step 3: See Their Score */}
+            <div className="flex flex-row items-center justify-start gap-4 border border-gray-200 rounded-lg p-4 w-55">
+              <svg
+                className="w-6 h-6"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="#444"
+                  strokeWidth="1.5"
+                  fill="white"
+                />
+                <path
+                  d="M8 12L10.5 14.5L16 9"
+                  stroke="#444"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              <p className="text-[#444]">See Their Score</p>
+            </div>
+          </div>
           <Link to={"/user/name"}>
             <button className="bg-red-500 font-extrabold shadow-[5px_5px_1px_#2b2b2b] hover:-translate-y-1 hover:shadow-[10px_10px_1px_#2b2b2b] text-white text-xl px-6 py-3 hover:bg-red-600 transition duration-300 ease-in-out uppercase">
               Find Out Now

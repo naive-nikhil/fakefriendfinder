@@ -5,10 +5,12 @@ const Home = () => {
   return (
     <>
       <div className="w-full h-[calc(100vh-120px)] flex flex-col items-center">
-        <div className="relative">
-          <img className="w-[350px] h-auto" src="/home.svg" alt="" />
+        <div className="relative bg-[#f8e8d1] w-full">
+          <div className="max-w-[250px] sm:max-w-[400px] h-auto mx-auto">
+            <img src="/home.svg" alt="" />
+          </div>
         </div>
-        <div className="flex flex-col items-center justify-center bg-white w-full h-full px-4 gap-2">
+        <div className="flex flex-col items-center justify-center bg-white w-full h-full gap-2">
           <h1 className="text-4xl font-extrabold text-center uppercase -rotate-6">
             who's{" "}
             <span className="text-red-500">
@@ -17,12 +19,12 @@ const Home = () => {
             </span>{" "}
             who's <span className="text-red-500">real?</span>
           </h1>
-          <div className="flex flex-col items-center justify-center p-4 text-base">
-            <h2 className="max-w-[400px] text-[#444] font-bold text-xl mb-4">
-              - How it works?
-            </h2>
+          <h2 className=" text-[#444] font-bold text-xl mt-4">
+            - How it works?
+          </h2>
+          <div className="flex flex-col sm:flex-row sm:gap-2 text-sm items-center justify-center py-4">
             {/* Step 1: Create Quiz */}
-            <div className="flex flex-row items-center justify-start gap-4 border border-gray-200 rounded-lg p-4 w-55">
+            <div className="flex flex-row items-center justify-start gap-4 border border-gray-200 rounded-lg p-4 w-51">
               <svg
                 className="w-6 h-6"
                 viewBox="0 0 24 24"
@@ -48,7 +50,7 @@ const Home = () => {
             </div>
 
             {/* Step 2: Share with Friends */}
-            <div className="flex flex-row items-center justify-start gap-4 border border-gray-200 rounded-lg p-4 w-55">
+            <div className="flex flex-row items-center justify-start gap-4 border border-gray-200 rounded-lg p-4 w-51">
               <svg
                 className="w-6 h-6"
                 viewBox="0 0 24 24"
@@ -68,7 +70,7 @@ const Home = () => {
             </div>
 
             {/* Step 3: See Their Score */}
-            <div className="flex flex-row items-center justify-start gap-4 border border-gray-200 rounded-lg p-4 w-55">
+            <div className="flex flex-row items-center justify-start gap-4 border border-gray-200 rounded-lg p-4 w-51">
               <svg
                 className="w-6 h-6"
                 viewBox="0 0 24 24"

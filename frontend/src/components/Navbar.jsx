@@ -1,6 +1,6 @@
 const Navbar = () => {
   return (
-    <div className="flex relative w-full overflow-hidden">
+    <div className="flex relative w-full overflow-hidden bg-[#f8e8d1]">
       <div className="w-full bg-[#f93943]">
         <div className="h-14 shadow-lg"></div>
         <div className="h-full bg-[#F8E8D1] rounded-tr-2xl"></div>

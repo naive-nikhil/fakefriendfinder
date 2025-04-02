@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <>
-      <div className="w-full h-[calc(100vh-120px)] flex flex-col items-center">
+      <div className="w-full h-[calc(100vh-80px)] flex flex-col items-center">
         <div className="relative bg-[#f8e8d1] w-full">
           <div className="max-w-[250px] sm:max-w-[400px] h-auto mx-auto">
             <img src="/home.svg" alt="" />
@@ -13,18 +13,18 @@ const Home = () => {
         <div className="flex flex-col items-center justify-center bg-white w-full h-full gap-2">
           <h1 className="text-4xl font-extrabold text-center uppercase -rotate-6">
             who's{" "}
-            <span className="text-red-500">
+            <span className="text-[#f93943]">
               fake,
               <br />
             </span>{" "}
-            who's <span className="text-red-500">real?</span>
+            who's <span className="text-[#f93943]">real?</span>
           </h1>
           <h2 className=" text-[#444] font-bold text-xl mt-4">
             - How it works?
           </h2>
           <div className="flex flex-col sm:flex-row sm:gap-2 text-sm items-center justify-center py-4">
             {/* Step 1: Create Quiz */}
-            <div className="flex flex-row items-center justify-start gap-4 border border-gray-200 rounded-lg p-4 w-51">
+            <div className="flex flex-row items-center justify-start gap-4 border border-gray-200 rounded-lg p-2 w-51">
               <svg
                 className="w-6 h-6"
                 viewBox="0 0 24 24"
@@ -50,7 +50,7 @@ const Home = () => {
             </div>
 
             {/* Step 2: Share with Friends */}
-            <div className="flex flex-row items-center justify-start gap-4 border border-gray-200 rounded-lg p-4 w-51">
+            <div className="flex flex-row items-center justify-start gap-4 border border-gray-200 rounded-lg p-2 w-51">
               <svg
                 className="w-6 h-6"
                 viewBox="0 0 24 24"
@@ -70,7 +70,7 @@ const Home = () => {
             </div>
 
             {/* Step 3: See Their Score */}
-            <div className="flex flex-row items-center justify-start gap-4 border border-gray-200 rounded-lg p-4 w-51">
+            <div className="flex flex-row items-center justify-start gap-4 border border-gray-200 rounded-lg p-2 w-51">
               <svg
                 className="w-6 h-6"
                 viewBox="0 0 24 24"
@@ -97,7 +97,7 @@ const Home = () => {
             </div>
           </div>
           <Link to={"/user/name"}>
-            <button className="bg-red-500 font-extrabold shadow-[5px_5px_1px_#2b2b2b] hover:-translate-y-1 hover:shadow-[10px_10px_1px_#2b2b2b] text-white text-xl px-6 py-3 hover:bg-red-600 transition duration-300 ease-in-out uppercase">
+            <button className="bg-[#f93943] font-extrabold shadow-[5px_5px_1px_#2b2b2b] hover:-translate-y-1 hover:shadow-[10px_10px_1px_#2b2b2b] text-white text-xl px-6 py-3 hover:bg-red-600 transition duration-300 ease-in-out uppercase">
               Find Out Now
             </button>
           </Link>

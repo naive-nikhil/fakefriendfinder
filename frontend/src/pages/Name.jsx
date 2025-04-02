@@ -7,12 +7,12 @@ const Name = () => {
       <div className="flex flex-col gap-2 justify-center items-center max-w-[400px] w-full h-full mx-auto mt-[-80px]">
         <h1 className="text-5xl">😄</h1>
         <h2 className="text-xl font-bold">
-          What's your <span className="text-[#f93943]">name?</span>
+          What's your <span className="text-red-500">name?</span>
         </h2>
-        <InputWithCharacterCount maxLength={15} placeholder="name..."/>
+        <InputWithCharacterCount maxLength={15} placeholder="name..." />
         <button
           type="submit"
-          className="p-4 bg-[#f93943] w-full rounded-3xl text-white font-semibold text-lg"
+          className="p-4 bg-red-500 hover:bg-red-600 outline-0 w-full rounded-3xl text-white font-semibold text-lg"
         >
           Continue
         </button>

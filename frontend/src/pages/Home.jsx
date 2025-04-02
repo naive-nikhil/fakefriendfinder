@@ -10,14 +10,14 @@ const Home = () => {
             <img src="/home.svg" alt="" />
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center bg-white w-full h-full gap-2">
+        <div className="flex flex-col items-center justify-center bg-white max-w-[400px] w-full h-full gap-2 p-4">
           <h1 className="text-4xl font-extrabold text-center uppercase -rotate-6">
             who's{" "}
-            <span className="text-[#f93943]">
+            <span className="text-red-500">
               fake,
               <br />
             </span>{" "}
-            who's <span className="text-[#f93943]">real?</span>
+            who's <span className="text-red-500">real?</span>
           </h1>
           <h2 className=" text-[#444] font-bold text-xl mt-4">
             - How it works?
@@ -96,8 +96,8 @@ const Home = () => {
               <p className="text-[#444]">See Their Score</p>
             </div>
           </div>
-          <Link to={"/user/name"}>
-            <button className="bg-[#f93943] font-extrabold shadow-[5px_5px_1px_#2b2b2b] hover:-translate-y-1 hover:shadow-[10px_10px_1px_#2b2b2b] text-white text-xl px-6 py-3 hover:bg-red-600 transition duration-300 ease-in-out uppercase">
+          <Link to={"/user/name"} className="w-full">
+            <button className="p-4 bg-red-500 hover:bg-red-600 outline-0 w-full rounded-3xl text-white font-semibold text-lg">
               Find Out Now
             </button>
           </Link>

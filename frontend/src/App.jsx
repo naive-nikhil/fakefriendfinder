@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import { Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Name from "./pages/Name";
+import Creating from "./pages/Creating";
 
 const App = () => {
   return (
@@ -11,10 +12,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/user/name" element={<Name />} />
-        <Route
-          path="/user/creating"
-          element={<div className="text-3xl">Home</div>}
-        />
+        <Route path="/user/creating" element={<Creating />} />
         <Route
           path="/user/share"
           element={<div className="text-3xl">Home</div>}

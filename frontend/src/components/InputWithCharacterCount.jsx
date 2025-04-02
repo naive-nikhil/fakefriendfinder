@@ -1,15 +1,18 @@
 import React, { useState } from "react";
+import { useGame } from "../context/GameContext";
 
 const InputWithCharacterCount = ({
   maxLength = 15,
   placeholder = "Type Something...",
 }) => {
-  const [text, setText] = useState("");
+  const { userName, setUserName } = useGame();
+  const [text, setText] = useState(userName);
 
   const handleChange = (e) => {
     const inputText = e.target.value;
     if (inputText.length <= maxLength) {
       setText(inputText);
+      setUserName(inputText);
     }
   };
 

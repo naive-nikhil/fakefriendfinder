@@ -1,4 +1,5 @@
 import React from "react";
+import InputWithCharacterCount from "../components/InputWithCharacterCount";
 
 const Name = () => {
   return (
@@ -8,12 +9,7 @@ const Name = () => {
         <h2 className="text-xl font-bold">
           What's your <span className="text-[#f93943]">name?</span>
         </h2>
-        <input
-          type="text"
-          placeholder="name..."
-          maxLength={15}
-          className="p-4 border-2 border-black/10 w-full rounded-3xl outline-0 font-semibold"
-        />
+        <InputWithCharacterCount maxLength={15} placeholder="name..."/>
         <button
           type="submit"
           className="p-4 bg-[#f93943] w-full rounded-3xl text-white font-semibold text-lg"

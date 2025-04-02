@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useGame } from "../context/GameContext";
 import questions from "../data/gameData";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Creating = () => {
   const navigate = useNavigate();
@@ -10,22 +11,52 @@ const Creating = () => {
   const [selQue, setSelQue] = useState([]);
   const totalQuestions = 10;
   const progressPercentage = ((selQue.length + 1) / totalQuestions) * 100;
+
+  if (curQueIndex >= questions.length) {
+    setCurQueIndex(0);
+  }
+
   const curQue = questions[curQueIndex];
 
-  const handleSelectAnswer = (answer) => {
-    console.log(answer);
-    setSelQue([...selQue, { question: curQue.question, answer }]);
+  const handleSubmitQuiz = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/create-game",
+        {
+          createdBy: userName,
+          gameData: selQue,
+        }
+      );
 
-    if (selQue.length + 1 === totalQuestions) {
-      navigate("/user/share");
+      if (response.data && response.data.gameId) {
+        navigate(`/user/share/${response.data.gameId}`);
+      }
+    } catch (error) {
+      console.error("Error creating game:", error);
     }
+  };
 
-    setCurQueIndex((prev) => prev + 1);
+  const handleSelectAnswer = (correctAnswer) => {
+    setSelQue((prevSelQue) => {
+      const newSelQue = [
+        ...prevSelQue,
+        { question: curQue.question, correctAnswer },
+      ];
+      return newSelQue;
+    });
+
+    setCurQueIndex((prev) => (prev + 1) % questions.length);
   };
 
   const handleSkip = () => {
-    setCurQueIndex((prev) => prev + 1);
+    setCurQueIndex((prev) => (prev + 1) % questions.length);
   };
+
+  useEffect(() => {
+    if (selQue.length === totalQuestions) {
+      handleSubmitQuiz();
+    }
+  }, [selQue]);
 
   return (
     <div className="flex flex-col items-center bg-[#f8e8d1] w-full h-[calc(100vh-80px)] p-4">

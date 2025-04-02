@@ -4,10 +4,10 @@ const { hashData } = require("../utils/hashData.js");
 
 exports.createGame = async (req, res) => {
   // Get Data from Request Body
-  const { gameData } = req.body;
+  const { createdBy, gameData } = req.body;
 
   // Validate Data
-  if (!gameData || !Array.isArray(gameData) || gameData.length !== 1) {
+  if (!gameData || !Array.isArray(gameData) || gameData.length !== 10) {
     return res
       .status(400)
       .json({ message: "Invalid game data, must be an array of 10 items." });
@@ -21,6 +21,14 @@ exports.createGame = async (req, res) => {
     }
   }
 
+  if (!createdBy) {
+    return res
+      .status(400)
+      .json({ message: "Name of the Quiz Creator is required!" });
+  }
+
+  const hashedCreatedBy = hashData(createdBy);
+
   // Hash game data
   const hashedGameData = gameData.map((item) => ({
     hashedQuestion: hashData(item.question),
@@ -28,7 +36,7 @@ exports.createGame = async (req, res) => {
   }));
 
   // Save to DB
-  const newGame = await Game.create({ hashedGameData });
+  const newGame = await Game.create({ hashedCreatedBy, hashedGameData });
 
   // Send Response
   res.status(201).json({ gameId: newGame._id });
@@ -79,7 +87,7 @@ exports.submitResponse = async (req, res) => {
   if (
     !guessedAnswers ||
     !Array.isArray(guessedAnswers) ||
-    guessedAnswers.length !== 1 ||
+    guessedAnswers.length !== 10 ||
     !friendName ||
     !score
   ) {

@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const gameSchema = new mongoose.Schema(
   {
+    hashedCreatedBy: { type: String, required: true },
     hashedGameData: [
       {
         hashedQuestion: { type: String, required: true },

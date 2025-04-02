@@ -21,7 +21,7 @@ const Creating = () => {
   const handleSubmitQuiz = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/create-game",
+        "https://fakefriendfinder.onrender.com/api/create-game",
         {
           createdBy: userName,
           gameData: selQue,

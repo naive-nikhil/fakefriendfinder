@@ -36,7 +36,7 @@ const App = () => {
           element={<div className="text-3xl">Home</div>}
         />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

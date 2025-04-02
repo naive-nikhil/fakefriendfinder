@@ -8,9 +8,10 @@
 * {
   box-sizing: border-box;
   font-family: "Poppins", cursive;
+  outline: none;
+  transition: all 0.3s ease;
 }
 
 body {
-  /* background-color: #f8e8d1; */
   color: #2b2b2b;
 }

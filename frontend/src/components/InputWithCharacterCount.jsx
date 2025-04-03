@@ -13,6 +13,7 @@ const InputWithCharacterCount = ({
     if (inputText.length <= maxLength) {
       setText(inputText);
       setUserName(inputText);
+      localStorage.setItem("userName", inputText);
     }
   };
 

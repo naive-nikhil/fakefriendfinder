@@ -27,16 +27,15 @@ exports.createGame = async (req, res) => {
       .json({ message: "Name of the Quiz Creator is required!" });
   }
 
-  const hashedCreatedBy = hashData(createdBy);
-
   // Hash game data
   const hashedGameData = gameData.map((item) => ({
-    hashedQuestion: hashData(item.question),
+    question: item.question,
     hashedCorrectAnswer: hashData(item.correctAnswer),
+    hashedOptions: hashData(item.options),
   }));
 
   // Save to DB
-  const newGame = await Game.create({ hashedCreatedBy, hashedGameData });
+  const newGame = await Game.create({ createdBy, hashedGameData });
 
   // Send Response
   res.status(201).json({ gameId: newGame._id });

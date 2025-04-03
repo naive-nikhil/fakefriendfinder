@@ -44,13 +44,25 @@ const Creating = () => {
   const handleSelectAnswer = (correctAnswer) => {
     if (selQue.length >= totalQuestions) return;
 
-    setSelQue((prevSelQue) => {
-      const newSelQue = [
-        ...prevSelQue,
-        { question: curQue.question, correctAnswer },
-      ];
-      return newSelQue;
-    });
+    // Get wrong options (excluding correct one)
+    const wrongOptions = questions
+      .flatMap((q) => q.options)
+      .filter((opt) => opt !== correctAnswer);
+
+    // Pick a random wrong answer
+    const randomWrongAnswer =
+      wrongOptions[Math.floor(Math.random() * wrongOptions.length)];
+
+    setSelQue((prevSelQue) => [
+      ...prevSelQue,
+      {
+        question: curQue.question,
+        correctAnswer,
+        options: [correctAnswer, randomWrongAnswer].sort(
+          () => Math.random() - 0.5
+        ), // Shuffle options
+      },
+    ]);
 
     setCurQueIndex((prev) => (prev + 1) % questions.length);
   };
@@ -84,7 +96,11 @@ const Creating = () => {
             ></div>
           </div>
           <p className="text-sm text-[#2b2b2b] mt-2">
-            Question {selQue.length + 1} of {totalQuestions}
+            Question{" "}
+            {selQue.length < totalQuestions
+              ? selQue.length + 1
+              : totalQuestions}{" "}
+            of {totalQuestions}
           </p>
           <h2 className="text-lg font-semibold mt-4 text-center">
             {curQue.question}

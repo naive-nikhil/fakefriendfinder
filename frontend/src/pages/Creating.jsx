@@ -32,6 +32,7 @@ const Creating = () => {
       );
 
       if (response.data && response.data.gameId) {
+        localStorage.setItem("gameId", response.data.gameId);
         navigate(`/user/share/${response.data.gameId}`);
       }
     } catch (error) {

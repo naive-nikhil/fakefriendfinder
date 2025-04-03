@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "./components/Navbar";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Name from "./pages/Name";
 import Creating from "./pages/Creating";
 import Share from "./pages/Share";
 
 const App = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    const existingGameId = localStorage.getItem("gameId");
+    console.log(existingGameId);
+    if (existingGameId) {
+      navigate(`/user/share/${existingGameId}`);
+    }
+  }, []);
   return (
     <>
       <Navbar />

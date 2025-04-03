@@ -46,6 +46,7 @@ const Share = () => {
         <img width="25" height="25" src="/whatsapp.png" alt="whatsapp--v1" />
         Share on Whatsapp
       </button>
+      <p className="text-sm mt-2">Create new quiz and delete this one!</p>
     </div>
   );
 };

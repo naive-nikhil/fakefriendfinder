@@ -121,3 +121,26 @@ exports.submitResponse = async (req, res) => {
 
   res.status(201).json({ message: "Response submitted successfully." });
 };
+
+exports.deleteGame = async (req, res) => {
+  // Get Id from req params
+  const { id } = req.params;
+
+  // Validate Id
+  if (!id) {
+    return res.status(400).json({ message: "Game Id is required." });
+  }
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ message: "Invalid Game Id." });
+  }
+
+  const deletedGame = await Game.findByIdAndDelete(id);
+
+  // Validate deleted game
+  if (!deletedGame) {
+    res.status(404).json({ message: "Game not found!" });
+  }
+
+  res.json({ message: "Game deleted successfully!" });
+};

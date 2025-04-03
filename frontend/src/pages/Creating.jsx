@@ -31,8 +31,9 @@ const Creating = () => {
       );
 
       if (response.data && response.data.gameId) {
+        console.log(response.data.gameId);
         localStorage.setItem("gameId", response.data.gameId);
-        navigate(`/user/share/${response.data.gameId}`);
+        navigate(`/user/share/${response.data.gameId}`, { replace: true });
       }
     } catch (error) {
       console.error("Error creating game:", error);

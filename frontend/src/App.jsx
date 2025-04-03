@@ -1,19 +1,28 @@
 import React, { useEffect } from "react";
 import Navbar from "./components/Navbar";
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import Name from "./pages/Name";
 import Creating from "./pages/Creating";
 import Share from "./pages/Share";
 
 const App = () => {
+  const location = useLocation();
   const navigate = useNavigate();
+
   useEffect(() => {
-    const existingGameId = localStorage.getItem("gameId");
-    if (existingGameId) {
-      navigate(`/user/share/${existingGameId}`);
+    const gameId = localStorage.getItem("gameId");
+    if (gameId && location.pathname !== `/user/share/${gameId}`) {
+      console.log("1st If");
+      navigate(`/user/share/${gameId}`, { replace: true });
     }
-  }, []);
+
+    if (!gameId && location.pathname.startsWith("/user/share")) {
+      console.log("2nd If");
+      navigate("/", { replace: true });
+    }
+  }, [location.pathname, navigate]);
+
   return (
     <>
       <Navbar />

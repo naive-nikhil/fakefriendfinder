@@ -36,8 +36,8 @@ const Share = () => {
         `https://fakefriendfinder.onrender.com/api/delete-game/${existingGameId}`
       );
       localStorage.removeItem("gameId");
-      localStorage.removeItem("userName"); // Remove from storage
-      navigate("/"); // Redirect to quiz creation
+      localStorage.removeItem("userName");
+      navigate("/", { replace: true });
       setDeleting(false);
     } catch (error) {
       console.error("Error deleting game:", error);
@@ -71,7 +71,7 @@ const Share = () => {
       </button>
       <p
         onClick={handleNewQuiz}
-        className="text-sm mt-2 text-red-500 font-medium flex flex-col justify-center items-center gap-2"
+        className="text-sm mt-2 text-red-500 font-medium flex flex-col justify-center items-center gap-2 cursor-pointer"
       >
         Create new quiz and delete this one!{" "}
         <Loader loading={deleting} color="#fb2c36" size={5} />

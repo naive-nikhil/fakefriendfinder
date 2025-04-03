@@ -14,7 +14,7 @@ const Name = () => {
         <InputWithCharacterCount maxLength={15} placeholder="name..." />
         <button
           type="submit"
-          onClick={() => navigate("/user/creating")}
+          onClick={() => navigate("/user/creating", { replace: true })}
           className="p-4 bg-red-500 hover:bg-red-600 outline-0 w-full rounded-3xl text-white font-semibold text-lg"
         >
           Continue

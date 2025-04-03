@@ -10,7 +10,6 @@ const App = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const existingGameId = localStorage.getItem("gameId");
-    console.log(existingGameId);
     if (existingGameId) {
       navigate(`/user/share/${existingGameId}`);
     }

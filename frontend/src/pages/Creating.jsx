@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useGame } from "../context/GameContext";
 import questions from "../data/gameData";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -7,7 +6,7 @@ import BounceLoader from "react-spinners/BounceLoader";
 
 const Creating = () => {
   const navigate = useNavigate();
-  const { userName } = useGame();
+  const userName = localStorage.getItem("userName");
   const [curQueIndex, setCurQueIndex] = useState(0);
   const [selQue, setSelQue] = useState([]);
   const [submitting, setSubmitting] = useState(false); // Loader state

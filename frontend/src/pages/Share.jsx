@@ -1,9 +1,13 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
+import Loader from "react-spinners/PulseLoader";
 
 const Share = () => {
+  const [deleting, setDeleting] = useState(false);
+  const navigate = useNavigate();
   const { gameId } = useParams();
-  const shareLink = `https://fakefriendfinder.netlify.app/find/${gameId}`;
+  const shareLink = `https://fakefriend.netlify.app/find/${gameId}`;
   const [buttonText, setButtonText] = useState("Copy");
   const message = encodeURIComponent(
     "*_Hey there_*! 👋\n\n" +
@@ -20,6 +24,25 @@ const Share = () => {
     setTimeout(() => {
       setButtonText("Copy");
     }, 3000);
+  };
+
+  const handleNewQuiz = async () => {
+    setDeleting(true);
+    const existingGameId = localStorage.getItem("gameId");
+    if (!existingGameId) return;
+
+    try {
+      await axios.delete(
+        `https://fakefriendfinder.onrender.com/api/delete-game/${existingGameId}`
+      );
+      localStorage.removeItem("gameId");
+      localStorage.removeItem("userName"); // Remove from storage
+      navigate("/"); // Redirect to quiz creation
+      setDeleting(false);
+    } catch (error) {
+      console.error("Error deleting game:", error);
+      setDeleting(false);
+    }
   };
 
   return (
@@ -46,7 +69,13 @@ const Share = () => {
         <img width="25" height="25" src="/whatsapp.png" alt="whatsapp--v1" />
         Share on Whatsapp
       </button>
-      <p className="text-sm mt-2">Create new quiz and delete this one!</p>
+      <p
+        onClick={handleNewQuiz}
+        className="text-sm mt-2 text-red-500 font-medium flex flex-col justify-center items-center gap-2"
+      >
+        Create new quiz and delete this one!{" "}
+        <Loader loading={deleting} color="#fb2c36" size={5} />
+      </p>
     </div>
   );
 };

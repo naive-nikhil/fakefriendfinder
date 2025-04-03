@@ -3,12 +3,21 @@ import { useLocation, useNavigate } from "react-router-dom";
 const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const gameId = localStorage.getItem("gameId");
+
+  const handleBack = () => {
+    if (gameId) {
+      navigate(`/user/share/${gameId}`);
+    } else {
+      navigate(-1);
+    }
+  };
 
   const showBackButton = location.pathname !== "/";
   return (
     <div className="flex relative w-full overflow-hidden bg-[#f8e8d1]">
       {showBackButton && (
-        <div className="absolute top-[15%] pl-4" onClick={() => navigate(-1)}>
+        <div className="absolute top-[15%] pl-4" onClick={handleBack}>
           <img src="/back.png" alt="back" />
         </div>
       )}

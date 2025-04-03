@@ -31,7 +31,7 @@ exports.createGame = async (req, res) => {
   const hashedGameData = gameData.map((item) => ({
     question: item.question,
     hashedCorrectAnswer: hashData(item.correctAnswer),
-    hashedOptions: hashData(item.options),
+    options: item.options,
   }));
 
   // Save to DB
@@ -65,6 +65,7 @@ exports.getGame = async (req, res) => {
   // Send Response
   res.status(200).json({
     gameId: game._id,
+    createdBy: game.createdBy,
     hashedGameData: game.hashedGameData,
   });
 };

@@ -44,10 +44,10 @@ const Creating = () => {
   const handleSelectAnswer = (correctAnswer) => {
     if (selQue.length >= totalQuestions) return;
 
-    // Get wrong options (excluding correct one)
+    // Extract all available answer values (excluding correct one)
     const wrongOptions = questions
-      .flatMap((q) => q.options)
-      .filter((opt) => opt !== correctAnswer);
+      .flatMap((q) => q.options.map((opt) => opt.value)) // Get all values
+      .filter((value) => value !== correctAnswer); // Exclude correct answer
 
     // Pick a random wrong answer
     const randomWrongAnswer =

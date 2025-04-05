@@ -27,6 +27,7 @@ exports.createGame = async (req, res) => {
       .json({ message: "Name of the Quiz Creator is required!" });
   }
 
+  console.log("Game Data: ", gameData);
   // Hash game data
   const hashedGameData = gameData.map((item) => ({
     question: item.question,

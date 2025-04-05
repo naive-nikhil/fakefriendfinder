@@ -7,7 +7,12 @@ const gameSchema = new mongoose.Schema(
       {
         question: { type: String, required: true },
         hashedCorrectAnswer: { type: String, required: true },
-        options: [{ type: String, required: true }],
+        options: [
+          {
+            value: { type: String, required: true },
+            image: { type: String, required: true },
+          },
+        ],
         _id: false,
       },
     ],

@@ -6,6 +6,8 @@ import Name from "./pages/Name";
 import Creating from "./pages/Creating";
 import Share from "./pages/Share";
 import Find from "./pages/Find";
+import PlayerName from "./pages/PlayerName";
+import Playing from "./pages/Playing";
 
 const App = () => {
   const location = useLocation();
@@ -31,14 +33,8 @@ const App = () => {
         <Route path="/user/creating" element={<Creating />} />
         <Route path="/user/share/:gameId" element={<Share />} />
         <Route path="/find/:gameId" element={<Find />} />
-        <Route
-          path="/player/name"
-          element={<div className="text-3xl">Home</div>}
-        />
-        <Route
-          path="/player/playing"
-          element={<div className="text-3xl">Home</div>}
-        />
+        <Route path="/player/name" element={<PlayerName />} />
+        <Route path="/player/playing" element={<Playing />} />
         <Route
           path="/player/completed"
           element={<div className="text-3xl">Home</div>}

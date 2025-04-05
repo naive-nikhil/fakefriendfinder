@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import questions from "../data/gameData";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import BounceLoader from "react-spinners/BounceLoader";
 
-const Creating = () => {
+const Playing = () => {
+  const gameId = localStorage.getItem("gameId");
+  const questions = JSON.parse(localStorage.getItem(`gameData_${gameId}`));
+  console.log(questions);
   const navigate = useNavigate();
   const userName = localStorage.getItem("userName");
   const [curQueIndex, setCurQueIndex] = useState(0);
@@ -13,17 +15,14 @@ const Creating = () => {
   const totalQuestions = 10;
   const progressPercentage = ((selQue.length + 1) / totalQuestions) * 100;
 
-  useEffect(() => {
-    if (curQueIndex >= questions.length) {
-      setCurQueIndex(0);
-    }
-  }, [curQueIndex]);
+  if (curQueIndex >= questions.length) {
+    setCurQueIndex(0);
+  }
 
   const curQue = questions[curQueIndex];
 
   const handleSubmitQuiz = async () => {
     setSubmitting(true);
-    console.log(selQue);
     try {
       const response = await axios.post(
         "https://fakefriendfinder.onrender.com/api/create-game",
@@ -44,43 +43,9 @@ const Creating = () => {
     }
   };
 
-  const handleSelectAnswer = (correctAnswerValue) => {
+  const handleSelectAnswer = (correctAnswer) => {
     if (selQue.length >= totalQuestions) return;
 
-    // Get the full correct option object
-    const correctOption = curQue.options.find(
-      (opt) => opt.value === correctAnswerValue
-    );
-
-    // Collect all possible wrong options across questions
-    const allWrongOptions = questions
-      .flatMap((q) => q.options)
-      .filter((opt) => opt.value !== correctAnswerValue);
-
-    // Pick a random wrong option object
-    const randomWrongOption =
-      allWrongOptions[Math.floor(Math.random() * allWrongOptions.length)];
-
-    // Prepare shuffled options array
-    const shuffledOptions = [correctOption, randomWrongOption].sort(
-      () => Math.random() - 0.5
-    );
-
-    // Add question to selected questions
-    setSelQue((prevSelQue) => [
-      ...prevSelQue,
-      {
-        question: curQue.question,
-        correctAnswer: correctAnswerValue,
-        options: shuffledOptions, // Now each option has { image, value }
-      },
-    ]);
-
-    setCurQueIndex((prev) => (prev + 1) % questions.length);
-  };
-
-  const handleSkip = () => {
-    if (selQue.length >= totalQuestions) return;
     setCurQueIndex((prev) => (prev + 1) % questions.length);
   };
 
@@ -142,19 +107,10 @@ const Creating = () => {
               </button>
             ))}
           </div>
-
-          {/* Skip Button */}
-          <button
-            onClick={handleSkip}
-            className="p-4 bg-red-500 hover:bg-red-600 outline-0 rounded-3xl text-white font-semibold text-sm mt-4 disabled:bg-red-300 disabled:cursor-not-allowed"
-            disabled={selQue.length >= totalQuestions}
-          >
-            Skip Question
-          </button>
         </>
       )}
     </div>
   );
 };
 
-export default Creating;
+export default Playing;
